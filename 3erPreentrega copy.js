@@ -44,7 +44,7 @@ btnLimpiar.addEventListener("click", ()=> {
   document.querySelector("div#reciboDeSueldo").textContent = "";
   }
   )
-debugger
+
 function realizarConsulta(){
   
     const empleadoEnNomina = nominaEmpleados.find(
@@ -98,18 +98,16 @@ function realizarConsulta(){
             console.clear();
             console.table(nominaEmpleados);
           });
+        }
           
-          let btnLimpiarTodo = document.getElementById("btnLimpiarTodo");
-            btnLimpiarTodo.addEventListener("click", () => {
-            document.getElementById("inputNombre").value = "";
-            document.getElementById("inputCategoria").value ="";
-            document.getElementById("inputAntiguedad").value ="";
-            document.querySelector("div#datosParaConsulta").textContent = "";
-            document.querySelector("div#reciboDeSueldo").textContent = "";
-        });
-        
-      }
-          
+              let btnLimpiarTodo = document.getElementById("btnLimpiarTodo");
+                btnLimpiarTodo.addEventListener("click", () => {
+                document.getElementById("inputNombre").value = "";
+                document.getElementById("inputCategoria").value ="";
+                document.getElementById("inputAntiguedad").value ="";
+                document.querySelector("div#datosParaConsulta").textContent = "";
+                document.querySelector("div#reciboDeSueldo").textContent = "";
+            });
               
               // if (isNaN(categoria) || isNaN(antiguedad) || nombre === "") {
               //   alert(
