@@ -1,3 +1,4 @@
+document.addEventListener("DOMContentLoaded", recuperarNomina())
 let consulta = 0;
 
 class Empleado {
@@ -97,25 +98,25 @@ function realizarConsulta(){
             );
             console.clear();
             console.table(nominaEmpleados);
+            debugger
+            guardarNomina();
+          });
+          
+          let btnLimpiarTodo = document.getElementById("btnLimpiarTodo");
+          btnLimpiarTodo.addEventListener("click", () => {
+            document.getElementById("inputNombre").value = "";
+            document.getElementById("inputCategoria").value ="";
+            document.getElementById("inputAntiguedad").value ="";
+            document.querySelector("div#datosParaConsulta").textContent = "";
+            document.querySelector("div#reciboDeSueldo").textContent = "";
           });
         }
-          
-              let btnLimpiarTodo = document.getElementById("btnLimpiarTodo");
-                btnLimpiarTodo.addEventListener("click", () => {
-                document.getElementById("inputNombre").value = "";
-                document.getElementById("inputCategoria").value ="";
-                document.getElementById("inputAntiguedad").value ="";
-                document.querySelector("div#datosParaConsulta").textContent = "";
-                document.querySelector("div#reciboDeSueldo").textContent = "";
-            });
-              
               // if (isNaN(categoria) || isNaN(antiguedad) || nombre === "") {
               //   alert(
               //     "la categoria y antiguedad deben ser consignadas en número y el nombre no puede estar vacio"
               //     );
                 
             }            
-                  // numeroConsulta(consulta);
 
 function liquidar(nombre, legajo, categoria, antiguedad, consulta) {
     let datos = document.querySelector("div#datosParaConsulta")
@@ -136,6 +137,13 @@ function liquidar(nombre, legajo, categoria, antiguedad, consulta) {
       <h4>$ ${itemAntiguedad} de antiguedad.</h4>`
 }
 
-// function numeroConsulta(consulta) {
-//   alert("Consultas realizadas en esta sesión: " + consulta + "\nHasta pronto!");
-// }
+const guardarNomina = ()=> {
+  if (nominaEmpleados.length > 0) { localStorage.setItem("nominaEmpleados", JSON.stringify(nominaEmpleados)) }
+}
+
+const recuperarNomina = ()=> {
+  if (localStorage.getItem("nominaEmpleados")) {
+      let nominaRecuperada = JSON.parse(localStorage.getItem("nominaEmpleados"))
+      nominaRecuperada.forEach(empleado => nominaEmpleados.push(empleado))
+  }
+}
