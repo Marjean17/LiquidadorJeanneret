@@ -63,8 +63,6 @@ function realizarConsulta() {
       empleadoEnNomina.antiguedad,
       consulta
     );
-
-    // AL INGRESAR AL SIGUIENTE ELSE CUANDO EL LEGAJO NO SE ENCUENTRA REGISTRADO NO SE PUEDE VOLVER A CONSULTAR SOLO MEDIANTE EL INGRESO DE UN LEGAJO SI NO SE REFRESCA LA PAGINA.
   } else {
     let remove = document.getElementById("remover");
     remove.remove();
@@ -107,6 +105,30 @@ function realizarConsulta() {
         nominaEmpleados;
         localStorage.setItem("nominaGuardada", JSON.stringify(nominaEmpleados));
       }
+
+      datoSolicitado.innerHTML = `
+<div class="mt-2" id="remover">
+<label for="inputLegajo" class="form-label">Legajo</label>
+<input type="text" id="inputLegajo" class="form-control" placeholder="Ingrese su legajo">
+<div class="mt-2">  
+<button class="btn btn-info" id="btnConsultar">Consultar</button>
+<button class="btn btn-warning" id="btnLimpiar">Limpiar</button>
+</div>
+</div>
+`;
+
+      btnConsultar = document.getElementById("btnConsultar");
+      btnConsultar.addEventListener("click", () => {
+        legajoIngresado = document.getElementById("inputLegajo").value;
+        realizarConsulta(legajoIngresado);
+      });
+
+      btnLimpiar = document.getElementById("btnLimpiar");
+      btnLimpiar.addEventListener("click", () => {
+        document.getElementById("inputLegajo").value = "";
+        document.querySelector("div#datosParaConsulta").textContent = "";
+        document.querySelector("div#reciboDeSueldo").textContent = "";
+      });
     });
 
     let btnLimpiarTodo = document.getElementById("btnLimpiarTodo");
@@ -114,17 +136,9 @@ function realizarConsulta() {
       document.getElementById("inputNombre").value = "";
       document.getElementById("inputCategoria").value = "";
       document.getElementById("inputAntiguedad").value = "";
-      document.querySelector("div#datosParaConsulta").textContent = "";
-      document.querySelector("div#reciboDeSueldo").textContent = "";
     });
   }
 }
-
-// CUANDO SE RESUELVA LA SALIDA DEL ELSE SIN REFRESCAR LA PAGINA SE PUEDE AGREGAR ESTA ESTRUCTRA DE CONTROL
-// if (isNaN(categoria) || isNaN(antiguedad) || nombre === "") {
-//   alert(
-//     "la categoria y antiguedad deben ser consignadas en número y el nombre no puede estar vacio"
-//     );
 
 function liquidar(nombre, legajo, categoria, antiguedad, consulta) {
   let datos = document.querySelector("div#datosParaConsulta");
@@ -142,3 +156,9 @@ function liquidar(nombre, legajo, categoria, antiguedad, consulta) {
       <h4>$ ${itemUrSueldo} de sueldo y </h4>
       <h4>$ ${itemAntiguedad} de antiguedad.</h4>`;
 }
+
+// CUANDO SE RESUELVA LA SALIDA DEL ELSE SIN REFRESCAR LA PAGINA SE PUEDE AGREGAR ESTA ESTRUCTRA DE CONTROL
+// if (isNaN(categoria) || isNaN(antiguedad) || nombre === "") {
+//   alert(
+//     "la categoria y antiguedad deben ser consignadas en número y el nombre no puede estar vacio"
+//     );
