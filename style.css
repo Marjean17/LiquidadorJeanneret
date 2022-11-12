@@ -11,6 +11,11 @@
     font-size: small;
     margin: 20px;
   }
+
+  div{
+    margin: 20px 0px 10px 20px;
+  }
+
   @media screen and (min-width: 767px) {
     body {
       font-size: medium;
@@ -20,6 +25,6 @@
   .titulo {
     background: linear-gradient(90rad, lightblue, white);
     border-radius: 15px;
-    padding: 10px 0 10px 20px;
+    padding: 10px 0px 1000px 20px;
   }
   
